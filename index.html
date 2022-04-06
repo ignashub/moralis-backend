@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <!-- Moralis SDK code -->
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="https://unpkg.com/moralis/dist/moralis.js"></script>
+  </head>
+  <body>
+    <h1>Moralis Backend test</h1>
+    <button onClick="login()" id="btn-login">Login</button><br>
+    <p>Object Name</p>
+    <input type="text" name="metadataName" id="metadataName" placeholder="name"><br>
+    <p>Description</p>
+    <textarea name="metadataDescription" id="metadataDescription" cols="30" rows="10"></textarea><br>
+    <input type="file" name="fileInput" id="fileInput"><br><br>
+    
+    <button onClick="upload()">Upload</button><br><br><br>
+    <p>Get the File or Metdata</p>
+    <input type="text" name="fileHash" id="fileHash"><br><br>
+    <button onClick="get()">Get</button>
+​
+    <script>
+      // connect to Moralis server
+      const serverUrl = "https://57d0tnsw7vwx.usemoralis.com:2053/server";
+      const appId = "SOBedjSTVTz5eiaJFRj1DsHUpE9bfbpyUCpZO2ZW";
+      Moralis.start({ serverUrl, appId });
+
+      //Login
+      login = async () => {
+        Moralis.authenticate().then(function (user) {
+        console.log('logged in');
+        })
+      }
+
+      //Upload an image
+      uploadImage = async () => {
+        const data = fileInput.files[0]
+        const file = new Moralis.File(data.name, data)
+        await file.saveIPFS();
+        console.log(file.ipfs(), file.hash()) //file.ipfs is link, hash is hash of it
+        return file.ipfs(); //url where is the image is stored
+      }
+
+      //Upload metadata object: name, description, image
+
+      uploadMetadata = async (imageURL) => {
+
+        const name = document.getElementById('metadataName').value;
+        const description = document.getElementById('metadataDescription').value;
+
+        const metadata = {
+          "name": name,
+          "description": description,
+          "image": imageURL,
+        }
+
+        const file = new Moralis.File("file.json", {base64 : btoa(JSON.stringify(metadata))});
+        await file.saveIPFS();
+
+        console.log(file.ipfs(), file.hash());
+      }
+
+      //Function to upload
+      upload = async () => {
+        const image = await uploadImage();
+        await uploadMetadata(image)
+      }
+
+      //Function to get
+      get = async () => {
+        const ipfsHash = document.getElementById('fileHash').value;
+        const url = `https://gateway.moralisipfs.com/ipfs/${ipfsHash}`;
+        const response = await fetch(url);
+        
+        const data = await response.json();
+        console.log(data)
+        console.log(response)
+      }
+
+    </script>
+  </body>
+</html>
