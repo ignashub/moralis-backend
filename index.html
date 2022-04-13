@@ -6,7 +6,8 @@
   </head>
   <body>
     <h1>Moralis Backend test</h1>
-    <button onClick="login()" id="btn-login">Login</button><br>
+    <button onClick="login()" id="btn-login">LogIn</button><br>
+    <button onClick="logout()" id="btn-login">LogOut</button><br>
     <p>Object Name</p>
     <input type="text" name="metadataName" id="metadataName" placeholder="name"><br>
     <p>Description</p>
@@ -16,7 +17,8 @@
     <button onClick="upload()">Upload</button><br><br><br>
     <p>Get the File or Metdata</p>
     <input type="text" name="fileHash" id="fileHash"><br><br>
-    <button onClick="get()">Get</button>
+    <button onClick="get()">Get</button><br><br><br>
+
 ​
     <script>
       // connect to Moralis server
@@ -31,6 +33,8 @@
         })
       }
 
+      logout = async () => await Moralis.user().logout();
+
       //Upload an image
       uploadImage = async () => {
         const data = fileInput.files[0]
@@ -40,8 +44,20 @@
         return file.ipfs(); //url where is the image is stored
       }
 
-      //Upload metadata object: name, description, image
 
+      //Makes a DAO object and posts it to the database
+      defineNewObject = async () => {
+        const DAO = Moralis.Object.extend("DAO");
+        const dao = new DAO();
+        dao.set('name', 'BountiDAO');
+        dao.set('description', 'this is the best dao ever');
+        dao.set('users', 'user1');
+        dao.set('token', 'BTI');
+
+        await dao.save();
+      }
+
+      //Upload metadata object: name, description, image
       uploadMetadata = async (imageURL) => {
 
         const name = document.getElementById('metadataName').value;
