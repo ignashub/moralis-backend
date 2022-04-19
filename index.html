@@ -8,15 +8,16 @@
     <h1>Moralis Backend test</h1>
     <button onClick="login()" id="btn-login">LogIn</button><br>
     <button onClick="logout()" id="btn-login">LogOut</button><br>
-    <p>Object Name</p>
+    <p>Users Name</p>
     <input type="text" name="metadataName" id="metadataName" placeholder="name"><br>
-    <p>Description</p>
+    <p>Users Description</p>
     <textarea name="metadataDescription" id="metadataDescription" cols="30" rows="10"></textarea><br>
+    <p>Users Picture</p>
     <input type="file" name="fileInput" id="fileInput"><br><br>
     
     <button onClick="upload()">Upload</button><br><br><br>
-    <p>Get the File or Metdata</p>
-    <input type="text" name="fileHash" id="fileHash"><br><br>
+    <p>Get the CID based on Users name:</p>
+    <input type="text" name="userName" id="userName"><br><br>
     <button onClick="get()">Get</button><br><br><br>
 
 ​
@@ -37,29 +38,26 @@
 
       //Upload an image
       uploadImage = async () => {
+        const CIDImage = Moralis.Object.extend("CIDImage");
+        const cidimage = new CIDImage();
+        
         const data = fileInput.files[0]
         const file = new Moralis.File(data.name, data)
         await file.saveIPFS();
+
+        console.log('Image ipfs:')
         console.log(file.ipfs(), file.hash()) //file.ipfs is link, hash is hash of it
+
+        cidimage.set('cid', file.hash());
+        await cidimage.save();
+
         return file.ipfs(); //url where is the image is stored
-      }
-
-
-      //Makes a DAO object and posts it to the database
-      defineNewObject = async () => {
-        const DAO = Moralis.Object.extend("DAO");
-        const dao = new DAO();
-        dao.set('name', 'BountiDAO');
-        dao.set('description', 'this is the best dao ever');
-        dao.set('users', 'user1');
-        dao.set('token', 'BTI');
-
-        await dao.save();
       }
 
       //Upload metadata object: name, description, image
       uploadMetadata = async (imageURL) => {
-
+        const User = Moralis.Object.extend("Users");
+        const user = new User();
         const name = document.getElementById('metadataName').value;
         const description = document.getElementById('metadataDescription').value;
 
@@ -68,10 +66,16 @@
           "description": description,
           "image": imageURL,
         }
+        
 
         const file = new Moralis.File("file.json", {base64 : btoa(JSON.stringify(metadata))});
+        
         await file.saveIPFS();
 
+        user.set('Name', name);
+        user.set('CID',file.hash());
+        await user.save();
+        console.log('Metadata:')
         console.log(file.ipfs(), file.hash());
       }
 
@@ -83,13 +87,20 @@
 
       //Function to get
       get = async () => {
-        const ipfsHash = document.getElementById('fileHash').value;
-        const url = `https://gateway.moralisipfs.com/ipfs/${ipfsHash}`;
-        const response = await fetch(url);
+        const query = new Moralis.Query("Users");
+
+        const userName = document.getElementById('userName').value;
+        query.equalTo("Name", userName);
+        const user = await query.first();
+        const userCID = user.attributes.CID;
+        // const ipfsHash = document.getElementById('fileHash').value;
+        const url = `https://gateway.moralisipfs.com/ipfs/${userCID}`;
+        // const response = await fetch(url);
         
-        const data = await response.json();
-        console.log(data)
-        console.log(response)
+        // const data = await response.json();
+        console.log(user)
+        console.log(url)
+
       }
 
     </script>
