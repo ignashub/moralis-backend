@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMoralis, useMoralisFile } from "react-moralis";
 import { Moralis } from "moralis";
+import abi from "../utils/UserStorage.json";
 
 function Main() {
   const {
@@ -11,9 +12,17 @@ function Main() {
     account,
     logout,
   } = useMoralis();
+
+  const ethers = Moralis.web3Library;
+
   const { saveFile, moralisFile } = useMoralisFile();
   const [image, setImage] = useState("");
   const [metadata, setMetadata] = useState("");
+  const [users, setUsers] = useState([]);
+
+  // variables for blockchain
+  const contractAddress = "0xe1B6A87aa756ca246913BBE9105D7Ccc437CC31f";
+  const contractABI = abi.abi;
 
   const login = async () => {
     if (!isAuthenticated) {
@@ -22,14 +31,26 @@ function Main() {
           console.log("logged in user:", user);
           console.log(user.get("ethAddress"));
         })
+          // .then(async () => {
+          //     await getAllUsers();
+          // })
         .catch(function (error) {
           console.log(error);
         });
     }
   };
 
+  useEffect(() => {
+      getAllUsers();
+      // if (user) {
+      //     console.log("They are actually authenticated")
+      //     getAllUsers();
+      // }
+  }, [])
+
   const logOut = async () => {
     await logout();
+    await getAllUsers();
     console.log("logged out");
   };
 
@@ -82,6 +103,7 @@ function Main() {
   const upload = async () => {
     const imageInMetadata = await uploadImage(image[0]);
     await uploadMetadata(imageInMetadata);
+    await postNewUser();
   };
 
   //Function to get
@@ -98,6 +120,31 @@ function Main() {
     console.log(url);
   };
 
+  // Getting all users from the blockchain
+    const getAllUsers = async () => {
+        const { ethereum } = window;
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const userStorageContract = new ethers.Contract(contractAddress, contractABI, signer);
+
+        const blockchainUsers = await userStorageContract.getAllUsers();
+        setUsers(blockchainUsers);
+
+        console.log("Here are our users: ")
+        console.log(users)
+    }
+
+    // Adding a new user to the blockchain
+    const postNewUser = async () => {
+        const { ethereum } = window;
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const userStorageContract = new ethers.Contract(contractAddress, contractABI, signer);
+        const userName = document.getElementById("metadataName").value;
+
+        await userStorageContract.addUser(userName)
+    }
+
   return (
     <div>
       <h1>Moralis Backend test</h1>
@@ -105,6 +152,14 @@ function Main() {
       <button onClick={logOut} disabled={isAuthenticating}>
         Logout
       </button>
+        <p>All Users</p>
+        {users.map((user, index) => {
+            return (
+                <div key={index} style={{ backgroundColor: "OldLace", marginTop: "16px", padding: "8px" }}>
+                    <div>Name: {user.name}</div>
+                    <div>Address: {user.userAddress}</div>
+                </div>)
+        })}
       <p>Users Name</p>
       <input
         type="text"
