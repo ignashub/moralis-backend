@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5ec54345-0204-44af-8931-2de05d8ef75c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/react-prototype/src/utils/UserStorage.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-prototype/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/react-prototype/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-prototype/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/react-prototype/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-prototype/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/react-prototype/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-prototype/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-prototype/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/react-prototype/src/components/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-prototype/src/components/Main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,6 +39,11 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Studying\moralis-backend\react-prototype\src\assets" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -44,7 +52,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1650488027856</updated>
-      <workItem from="1650488031189" duration="8690000" />
+      <workItem from="1650488031189" duration="9021000" />
+      <workItem from="1650524640935" duration="4602000" />
+      <workItem from="1650535493636" duration="608000" />
     </task>
     <servers />
   </component>

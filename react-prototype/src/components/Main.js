@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useMoralis, useMoralisFile } from "react-moralis";
 import { Moralis } from "moralis";
 import abi from "../utils/UserStorage.json";
+import {Button, Col, Row} from "react-bootstrap";
 
 function Main() {
   const {
@@ -147,34 +148,39 @@ function Main() {
 
   return (
     <div>
-      <h1>Moralis Backend test</h1>
-      <button onClick={login}>Moralis Metamask Login</button>
-      <button onClick={logOut} disabled={isAuthenticating}>
-        Logout
-      </button>
-        <p>All Users</p>
+            <h1 className="py-3" style={{color: 'white'}}>Backend Prototype</h1>
+          {/*<Row sm={6}>*/}
+          <Button variant="primary" onClick={login}>Moralis Metamask Login</Button>
+          {/*</Row>*/}
+          {/*<Row sm={6}>*/}
+              <Button className="mx-3" variant="danger" onClick={logOut} disabled={isAuthenticating}>
+              Logout
+          </Button>
+          {/*</Row>*/}
+
+        <h2 className="mt-3" style={{color: 'wheat'}}>All Users</h2>
         {users.map((user, index) => {
             return (
-                <div key={index} style={{ backgroundColor: "OldLace", marginTop: "16px", padding: "8px" }}>
+                <div className="mx-5" key={index} style={{ backgroundColor: "OldLace", marginTop: "16px", padding: "8px" }}>
                     <div>Name: {user.name}</div>
                     <div>Address: {user.userAddress}</div>
                 </div>)
         })}
-      <p>Users Name</p>
+      <h3 className="my-3" style={{color: 'wheat'}}>Users Name</h3>
       <input
         type="text"
         name="metadataName"
         id="metadataName"
         placeholder="name"
       ></input>
-      <p>Users Description</p>
+      <h3 className="my-3" style={{color: 'wheat'}}>Users Description</h3>
       <textarea
         name="metadataDescription"
         id="metadataDescription"
         cols={30}
         rows={10}
       ></textarea>
-      <p>Users Picture</p>
+      <h3 className="my-3" style={{color: 'wheat'}}>Users Picture</h3>
       <input
         type="file"
         name="fileInput"
@@ -182,10 +188,10 @@ function Main() {
         onChange={(e) => setImage(e.target.files)}
       ></input>
 
-      <button onClick={upload}>Upload</button>
-      <p>Get the CID based on Users name:</p>
-      <input type="text" name="userName" id="userName"></input>
-      <button onClick={get}>Get</button>
+      <Button variant="success" onClick={upload}>Upload</Button>
+      <h3 className="my-3" style={{color: 'wheat'}}>Get the CID based on Users name:</h3>
+      <input className="mx-1 mb-3" type="text" name="userName" id="userName"></input>
+      <Button className="mx-3 mb-3" variant="primary" onClick={get}>Get</Button>
     </div>
   );
 }
