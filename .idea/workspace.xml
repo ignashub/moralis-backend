@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ec54345-0204-44af-8931-2de05d8ef75c" name="Changes" comment="Improved front-end part of application and made it User friendly" />
+    <list default="true" id="5ec54345-0204-44af-8931-2de05d8ef75c" name="Changes" comment="Improved front-end part of application and made it User friendly">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-prototype/src/components/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-prototype/src/components/Main.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -51,6 +54,7 @@
       <workItem from="1650707702105" duration="1964000" />
       <workItem from="1650726950921" duration="2542000" />
       <workItem from="1650976852945" duration="7204000" />
+      <workItem from="1650994978928" duration="2098000" />
     </task>
     <task id="LOCAL-00001" summary="Improved front-end part of application and made it User friendly">
       <created>1650984480660</created>

@@ -132,7 +132,7 @@ function Main() {
   return (
     <div className="pb-3">
         <h1 className="py-3" style={{color: 'white'}}>Backend Prototype</h1>
-          <Button variant="primary" onClick={login}>Moralis Metamask Login</Button>
+          <Button variant="primary" onClick={login}>Metamask Login</Button>
           <Button className="mx-3" variant="danger" onClick={logOut} disabled={isAuthenticating}>
           Logout
           </Button>
