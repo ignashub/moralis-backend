@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ec54345-0204-44af-8931-2de05d8ef75c" name="Changes" comment="Improved front-end part of application and made it User friendly">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react-prototype/src/components/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-prototype/src/components/Main.js" afterDir="false" />
-    </list>
+    <list default="true" id="5ec54345-0204-44af-8931-2de05d8ef75c" name="Changes" comment="Improved front-end a bit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,7 +51,7 @@
       <workItem from="1650707702105" duration="1964000" />
       <workItem from="1650726950921" duration="2542000" />
       <workItem from="1650976852945" duration="7204000" />
-      <workItem from="1650994978928" duration="2098000" />
+      <workItem from="1650994978928" duration="2731000" />
     </task>
     <task id="LOCAL-00001" summary="Improved front-end part of application and made it User friendly">
       <created>1650984480660</created>
@@ -63,7 +60,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650984480660</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Improved front-end a bit">
+      <created>1651000895277</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1651000895277</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -82,6 +86,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Improved front-end part of application and made it User friendly" />
-    <option name="LAST_COMMIT_MESSAGE" value="Improved front-end part of application and made it User friendly" />
+    <MESSAGE value="Improved front-end a bit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Improved front-end a bit" />
   </component>
 </project>
